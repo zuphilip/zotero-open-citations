@@ -7,7 +7,7 @@
         RDF:about="urn:mozilla:install-manifest"
         em:id="zotero-open-citations@bib.uni-mannheim.de"
         em:name="Zotero Open Citations"
-        em:version="0.1.0"
+        em:version="0.1.1"
         em:type="2"
         em:iconURL="chrome://zoteroopencitations/skin/wooc.png"
         em:icon64URL="chrome://zoteroopencitations/skin/wooc64x64.png"
