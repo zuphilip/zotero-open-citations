@@ -6,9 +6,7 @@
     id="zoteroopencitations"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-    <script
-        type="application/x-javascript"
-        src="chrome://zoteroopencitations/content/scripts/zoteroopencitations.js"/>
+    <script src="chrome://zoteroopencitations/content/zoteroopencitations.js"/>
     <script src="chrome://zotero/content/include.js"/>
 
     <stringbundleset id="stringbundleset">
@@ -36,16 +34,5 @@
             </menupopup>
         </menu>
     </popup>
-
-		<!--
-    <menupopup
-        id="menu_ToolsPopup" onpopupshowing="Zotero.ShortDOI.setCheck();">
-        <menuitem
-            id="zoteroshortdoi-options-autoshort"
-            label="&zotero.zoteroshortdoi.toolsmenu.autoshort.label;"
-            type="checkbox"
-            oncommand="Zotero.ShortDOI.changePref()"/>
-    </menupopup>
-		-->
 
 </overlay>
