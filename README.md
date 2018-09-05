@@ -1,5 +1,11 @@
 # Open Citations Plugin for Zotero
 
+Add some functionalities for open citations like from OpenCitations, WikiCite, EPMC, Crossref to Zotero. Currently, a DOI lookup in OpenCitations is implemented and the result is added as a note:
+
+![](https://i.imgur.com/lnfUSKR.gif)
+
+*TODO more and better functionalities*
+
 ## Installation
 
 To install the extension:
