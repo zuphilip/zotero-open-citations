@@ -2,11 +2,16 @@
 
 ## Installation
 
-TODO
+To install the extension:
+
+* Download the XPI file of the [latest release](https://github.com/zuphilip/zotero-open-citations/releases).
+* In Zotero, go to Tools → Add-ons and drag the .xpi onto the Add-ons window.
+
 
 ## Build and release
 
-TODO
+Run `build.sh` script, which creates a new `.xpi` file.
+Tagging a new version and releasing has to been done manually.
 
 ## Development
 
