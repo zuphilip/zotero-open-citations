@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://zoteroopencitations/locale/zoteroopencitations.dtd">
+
+<overlay
+    id="zoteroopencitations"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    <script
+        type="application/x-javascript"
+        src="chrome://zoteroopencitations/content/scripts/zoteroopencitations.js"/>
+    <script src="chrome://zotero/content/include.js"/>
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle
+            id="zoteroopencitations-bundle"
+            src="chrome://zoteroopencitations/locale/zoteroopencitations.properties"/>
+    </stringbundleset>
+
+    <popup
+        id="zotero-itemmenu">
+        <menu class="menu-iconic" image="chrome://zoteroopencitations/skin/wooc32x32.png" id="zotero-itemmenu-opencitations-menu" label="&opencitations.menu.label;">
+            <menupopup id="zotero-itemmenu-opencitations-menupopup">
+                <menuitem
+                    id="zotero-itemmenu-opencitations-oc"
+                    label="&opencitations.oc.label;"
+                    oncommand="Zotero.OpenCitations.checkOC()"/>
+                <menuitem
+                    id="zotero-itemmenu-opencitations-wikicite"
+                    label="&opencitations.wikicite.label;"
+                    oncommand="Zotero.OpenCitations.checkWikicite()"/>
+                <menuitem
+                    id="zotero-itemmenu-opencitations-epmc"
+                    label="&opencitations.epmc.label;"
+                    oncommand="Zotero.OpenCitations.checkEPMC()"/>
+            </menupopup>
+        </menu>
+    </popup>
+
+		<!--
+    <menupopup
+        id="menu_ToolsPopup" onpopupshowing="Zotero.ShortDOI.setCheck();">
+        <menuitem
+            id="zoteroshortdoi-options-autoshort"
+            label="&zotero.zoteroshortdoi.toolsmenu.autoshort.label;"
+            type="checkbox"
+            oncommand="Zotero.ShortDOI.changePref()"/>
+    </menupopup>
+		-->
+
+</overlay>

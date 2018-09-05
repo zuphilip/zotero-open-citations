@@ -1,0 +1,7 @@
+content zoteroopencitations chrome/content/
+
+overlay chrome://zotero/content/zoteroPane.xul chrome://zoteroopencitations/content/overlay.xul
+
+locale  zoteroopencitations  en-US   chrome/locale/en-US/
+
+skin    zoteroopencitations  default chrome/skin/default/zoteroopencitations/
