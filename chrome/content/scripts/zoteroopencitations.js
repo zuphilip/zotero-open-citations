@@ -1,7 +1,7 @@
 Zotero.OpenCitations = {};
 
 Zotero.OpenCitations.init =  function() {
-	alert("TODO code for init...")
+	alert("TODO code for init...");
 };
 
 Zotero.OpenCitations.checkOC =  function() {
@@ -36,15 +36,28 @@ Zotero.OpenCitations.checkOC =  function() {
 				let notes = item.getNotes();
 				for (let noteID of notes) {
 					let note = Zotero.Items.get(noteID);
-					if (note.getNote().includes("Open Citations for")) {
+					if (note.getNote().includes("OpenCitations")) {
 						// overwrite this note
 						newNote = note;
 					}
 				}
-				let message = "<h2>Open Citations for " + doi + "</h2><p>"
-					+ "Found <b>" + response.length + "</b> citations: </p><p>"
-					+ JSON.stringify(response, null, '\t')
-					+ "</p><p>Source: <a href='" + url + "'>" + url + "</a></p>"
+				let message = "<h2>Result from <a href='" + url + "'>OpenCitations</a> for " + doi + "</h2>";
+				message += "<p>Found <b>" + response.length + "</b> citations: </p>";
+				response.sort((a, b) => new Date(b.creation) - new Date(a.creation));
+				if (response.length > 0) {
+					let year = response[0].creation.substring(0,4);
+					message += "<h3>" + year + "<h3><ul>";
+					for (let row of response) {
+						if (row.creation.substring(0,4) !== year) {
+							year = row.creation.substring(0,4);
+							message += "</ul><h3>" + year + "<h3><ul>";
+						}
+						message += "<li><a href='https://doi.org/" + row.citing + "'>https://doi.org/" + row.citing + "</a>";
+						message += " (" + row.creation + ")</li>";
+					}
+					message += "</ul>";
+				}
+				//message += JSON.stringify(response, null, '\t');
 				newNote.setNote(message);
 				newNote.parentID = itemID;
 				noteID = newNote.saveTx();
@@ -53,7 +66,7 @@ Zotero.OpenCitations.checkOC =  function() {
 				Zotero.debug(req);
 				// alert(req.readyState + " " + req.statusText);
 			}
-		}
+		};
 		
 		req.send(null);
 	}
