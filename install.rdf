@@ -7,7 +7,7 @@
         RDF:about="urn:mozilla:install-manifest"
         em:id="zotero-open-citations@bib.uni-mannheim.de"
         em:name="Zotero Open Citations"
-        em:version="0.0.1"
+        em:version="0.1.0"
         em:type="2"
         em:iconURL="chrome://zoteroopencitations/skin/wooc.png"
         em:icon64URL="chrome://zoteroopencitations/skin/wooc64x64.png"
@@ -16,7 +16,6 @@
         em:homepageURL="https://github.org/zuphilip/zotero-open-citations"
         em:updateURL="https://raw.githubusercontent.com/zuphilip/zotero-open-citations/master/update.rdf">
         <em:type>2</em:type>
-        <em:targetApplication RDF:resource="rdf:#$x61SL3"/>
         <em:targetApplication>
             <Description>
                 <em:id>zotero@chnm.gmu.edu</em:id>
