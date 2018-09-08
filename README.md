@@ -6,6 +6,7 @@ Add some functionalities for open citations like from OpenCitations, WikiCite, E
 
 *TODO more and better functionalities*
 
+
 ## Installation
 
 To install the extension:
@@ -19,6 +20,7 @@ To install the extension:
 Run `build.sh` script, which creates a new `.xpi` file.
 Tagging a new version and releasing has to been done manually.
 
+
 ## Development
 
 Create a text file containing the full path to this directory,
@@ -27,6 +29,6 @@ subdirectory of your [Zotero profile directory](https://www.zotero.org/support/k
 Restart Zotero to try the latest code changes.
 
 
-## LICENSE
+## License
 
-open source
+The source code is released under [GNU Affero General Public License v3](LICENSE).
