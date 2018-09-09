@@ -8,6 +8,9 @@ Zotero.OpenCitations.checkOC = function() {
 	// TODO: make this configurable by the user
 	// TODO: use config variable to save that number
 	var maxNumberOfItemsToRetrieve = 3;
+	if (!ZoteroPane) {
+		var ZoteroPane = Components.classes["@mozilla.org/appshell/window-mediator;1"] .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").ZoteroPane;
+	}
 	var items = ZoteroPane.getSelectedItems();
 	var currentCollection = ZoteroPane.getSelectedCollection();
 	for (let item of items) {

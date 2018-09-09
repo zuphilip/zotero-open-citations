@@ -6,8 +6,8 @@
     id="zoteroopencitations"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-    <script src="chrome://zoteroopencitations/content/zoteroopencitations.js"/>
     <script src="chrome://zotero/content/include.js"/>
+    <script src="chrome://zoteroopencitations/content/zoteroopencitations.js"/>
 
     <stringbundleset id="stringbundleset">
         <stringbundle
