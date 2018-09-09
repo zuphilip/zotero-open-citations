@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <RDF:RDF
     xmlns:em="http://www.mozilla.org/2004/em-rdf#"
-    xmlns:NC="http://home.netscape.com/NC-rdf#"
     xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
     <RDF:Description
         RDF:about="urn:mozilla:install-manifest"
@@ -15,6 +14,7 @@
         em:description="Zotero Plugin for Open Citations"
         em:homepageURL="https://github.org/zuphilip/zotero-open-citations"
         em:updateURL="https://raw.githubusercontent.com/zuphilip/zotero-open-citations/master/update.rdf">
+        <em:optionsURL>chrome://zoteroopencitations/content/preferences.xul</em:optionsURL>
         <em:type>2</em:type>
         <em:targetApplication>
             <Description>

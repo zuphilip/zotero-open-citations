@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE prefwindow SYSTEM "chrome://zoteroopencitations/locale/zoteroopencitations.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<prefwindow 
+    id="zoteroopencitations-preferences"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    <script src="chrome://zotero/content/include.js"/>
+    <script src="chrome://zoteroopencitations/content/zoteroopencitations.js"/>
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle
+            id="zoteroopencitations-bundle"
+            src="chrome://zoteroopencitations/locale/zoteroopencitations.properties"/>
+    </stringbundleset>
+
+    <prefpane label="General" id="opencitations-prefpane-general" flex="1" position="1">
+        <preferences>
+            <preference id="pref-opencitations-maxNumberOfItemsToRetrieve" name="extensions.zotero.opencitations.maxNumberOfItemsToRetrieve" type="int"/>
+        </preferences>
+        <groupbox>
+            <caption label="Number of items to retrieve"/>
+            <label value="The number of items to retrieve when you are checking for open citations is limited."/>
+            <label value="You can change that limit here by entering a new limit (default value is 3)"/>
+            <textbox id="pref-opencitations-maxNumberOfItemsToRetrieve-value" flex="1" preference="pref-opencitations-maxNumberOfItemsToRetrieve"/>
+        </groupbox>
+    </prefpane>
+
+</prefwindow>
