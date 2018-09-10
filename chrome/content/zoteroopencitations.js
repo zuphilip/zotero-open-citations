@@ -76,7 +76,7 @@ Zotero.OpenCitations.checkOC = function() {
 							"DOI": row.citing
 						});
 						translate.setTranslator("11645bd1-0420-45c1-badb-53fb41eeb753"); // CrossRef.js
-						let newItems = translate.translate({
+						let newItems = await translate.translate({
 							libraryID: item.libraryID,
 							collections: [citationCollectionId]
 						});
