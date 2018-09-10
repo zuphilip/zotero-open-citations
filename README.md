@@ -18,7 +18,8 @@ To install the extension:
 ## Build and release
 
 Run `build.sh` script, which creates a new `.xpi` file.
-Tagging a new version and releasing has to been done manually.
+
+For a new release, run the script `release.sh`, push the code changes, publish a [new release on GitHub](https://github.com/zuphilip/zotero-open-citations/releases/new) and attach the `.xpi` file there.
 
 
 ## Development
