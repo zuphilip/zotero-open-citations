@@ -1,6 +1,7 @@
 # Open Citations Plugin for Zotero
 
-Add some functionalities for open citations like from OpenCitations, WikiCite, EPMC, Crossref to Zotero. Currently, a DOI lookup in OpenCitations is implemented and the result is added as a note:
+This Zotero plugin adds information about open citations data for one or several items in Zotero.
+Currently, a DOI lookup in the [OpenCitations COCI service](https://w3id.org/oc/index/coci) is implemented, the result is added as a note, and the latest references are saved in a special collection in Zotero:
 
 ![](https://i.imgur.com/lnfUSKR.gif)
 

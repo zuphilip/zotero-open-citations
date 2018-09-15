@@ -48,7 +48,7 @@ Zotero.OpenCitations.checkOC = function() {
 				let response = JSON.parse(req.responseText);
 				response.sort((a, b) => new Date(b.creation) - new Date(a.creation));
 				
-				let message = "<h2>Result from <a href='" + url + "'>OpenCitations</a> for " + doi + "</h2>";
+				let message = "<h2>Result from the <a href='" + url + "'>OpenCitations COCI Service</a> for " + doi + "</h2>";
 				message += "<p>Found <b>" + response.length + "</b> citations: </p>";
 				if (response.length > 0) {
 					let year = response[0].creation.substring(0,4);
