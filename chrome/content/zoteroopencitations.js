@@ -71,20 +71,26 @@ Zotero.OpenCitations.checkOC = function() {
 					var citationCollectionId = await citationCollection.saveTx();
 					
 					for (let row of response.slice(0, maxNumberOfItemsToRetrieve)) {
-						var translate = new Zotero.Translate.Search();
-						translate.setIdentifier({
+						var translator = new Zotero.Translate.Search();
+						translator.setIdentifier({
 							"DOI": row.citing
 						});
-						translate.setTranslator("11645bd1-0420-45c1-badb-53fb41eeb753"); // CrossRef.js
-						let newItems = await translate.translate({
+						let newItems = await translator.translate({
 							libraryID: item.libraryID,
 							collections: [citationCollectionId]
 						});
+						// create relation in both directions
+						if (newItems && newItems.length>0) {
+							newItems[0].addRelatedItem(item);
+							await newItems[0].saveTx();
+							item.addRelatedItem(newItems[0]);
+							await item.saveTx();
+						}
 					}
 				}
 				newNote.setNote(message);
 				newNote.parentID = itemID;
-				noteID = newNote.saveTx();
+				noteID = await newNote.saveTx();
 				
 			} else {
 				Zotero.debug(req);
