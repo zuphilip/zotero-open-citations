@@ -72,7 +72,7 @@ Zotero.OpenCitations.checkOC = function() {
 					message += "</ul>";
 					
 					let citationCollection = new Zotero.Collection();
-					citationCollection.name = "Newest citations of " + doi;
+					citationCollection.name = "Newest citations of '" + item.getField('title') + "', " + doi;
 					citationCollection.parentID = currentCollection.id;
 					// resolve the returned promise here with await
 					var citationCollectionId = await citationCollection.saveTx();
