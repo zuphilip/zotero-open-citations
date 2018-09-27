@@ -10,6 +10,13 @@ Zotero.OpenCitations.checkOC = function() {
 		var ZoteroPane = Components.classes["@mozilla.org/appshell/window-mediator;1"] .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").ZoteroPane;
 	}
 	var items = ZoteroPane.getSelectedItems();
+	// warn when more than 50 items are selected
+	if (items.length > 50) {
+		var sure = confirm("This may take quite some time, as you have selected more than 50 entries. There is no possibility to interupt the process once started. Continue?")
+		if (!sure) {
+			return false;
+		}
+	}
 	var currentCollection = ZoteroPane.getSelectedCollection();
 	for (let item of items) {
 		if (!item.isRegularItem() || item.isCollection()) continue;
