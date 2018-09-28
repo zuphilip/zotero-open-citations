@@ -71,11 +71,21 @@ Zotero.OpenCitations.checkOC = function() {
 					}
 					message += "</ul>";
 					
-					let citationCollection = new Zotero.Collection();
-					citationCollection.name = "Newest citations of '" + item.getField('title') + "', " + doi;
-					citationCollection.parentID = currentCollection.id;
-					// resolve the returned promise here with await
-					var citationCollectionId = await citationCollection.saveTx();
+					// use eiter existing subcollection with citations or create a new one
+					var citationCollectionId;
+					let subcollections = currentCollection.getChildCollections()
+					for (let coll of subcollections) {
+						if (coll.name.includes("Newest citations") && coll.name.includes(doi)) { // TODO or better startsWith and endsWith ??
+							citationCollectionId = coll.id;
+						}
+					}
+					if (!citationCollectionId) {
+						let citationCollection = new Zotero.Collection();
+						citationCollection.name = "Newest citations of '" + item.getField('title') + "', " + doi;
+						citationCollection.parentID = currentCollection.id;
+						// resolve the returned promise here with await
+						citationCollectionId = await citationCollection.saveTx();
+					}
 					
 					for (let row of response.slice(0, maxNumberOfItemsToRetrieve)) {
 						var translator = new Zotero.Translate.Search();
