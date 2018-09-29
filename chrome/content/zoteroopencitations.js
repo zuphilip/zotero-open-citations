@@ -87,21 +87,48 @@ Zotero.OpenCitations.checkOC = function() {
 						citationCollectionId = await citationCollection.saveTx();
 					}
 					
-					for (let row of response.slice(0, maxNumberOfItemsToRetrieve)) {
-						var translator = new Zotero.Translate.Search();
-						translator.setIdentifier({
-							"DOI": row.citing
-						});
-						let newItems = await translator.translate({
-							libraryID: item.libraryID,
-							collections: [citationCollectionId]
-						});
+					for (let i=0; i<response.length; i++) {
+						let row = response[i];
+						var search = new Zotero.Search();
+						// search for an item with this DOI...
+						search.addCondition('DOI', 'is', row.citing);
+						var searchResults = await search.search(); // results only ids
+						// ...preferably within the citation subcollection
+						search.addCondition('collectionID', 'is', citationCollectionId);
+						var searchResultsWithinSubcollection = await search.search();
+						let result; // either already in library or newly created item
+						if (searchResults.length > 0) {
+							if (searchResultsWithinSubcollection.length > 0) {
+								result = Zotero.Items.get(searchResultsWithinSubcollection[0]);
+							} else {
+								result = Zotero.Items.get(searchResults[0]);
+							}
+							if (!result.getCollections().includes(citationCollectionId)) {
+								result.addToCollection(citationCollectionId);
+								result.saveTx();
+							}
+						// Retrieve new items
+						} else if (i<maxNumberOfItemsToRetrieve) {
+							var translator = new Zotero.Translate.Search();
+							translator.setIdentifier({
+								"DOI": row.citing
+							});
+							result = await translator.translate({
+								libraryID: item.libraryID,
+								collections: [citationCollectionId]
+							});
+						}
 						// create relation in both directions
-						if (newItems && newItems.length>0) {
-							newItems[0].addRelatedItem(item);
-							await newItems[0].saveTx();
-							item.addRelatedItem(newItems[0]);
-							await item.saveTx();
+						if (result) {
+							if (Array.isArray(result)) {
+								result = result[0];
+							}
+							if (!result.relatedItems.includes(item.key)) {
+								result.addRelatedItem(item);
+								await result.saveTx();
+								item.addRelatedItem(result);
+								await item.saveTx();
+							}
 						}
 					}
 				}
