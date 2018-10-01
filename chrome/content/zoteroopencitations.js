@@ -55,21 +55,24 @@ Zotero.OpenCitations.checkOC = function() {
 				let response = JSON.parse(req.responseText);
 				response.sort((a, b) => new Date(b.creation) - new Date(a.creation));
 				
-				let message = "<h2>Result from the <a href='" + url + "'>OpenCitations COCI Service</a> for " + doi + "</h2>";
+				let message = "<html><h2>Result from the <a href='" + url + "'>OpenCitations COCI Service</a> for " + doi + "</h2>";
 				message += "<p>Found <b>" + response.length + "</b> citations: </p>";
 				if (response.length > 0) {
 					let year = response[0].creation.substring(0,4);
 					message += "<h3>" + year + "<h3><ul>";
-					for (let row of response) {
+					for (let i=0; i<response.length; i++) {
+						let row = response[i];
 						if (row.creation.substring(0,4) !== year) {
 							// create a new subsection for each new year
 							year = row.creation.substring(0,4);
 							message += "</ul><h3>" + year + "<h3><ul>";
 						}
-						message += "<li><a href='https://doi.org/" + row.citing + "'>https://doi.org/" + row.citing + "</a>";
+						message += "<li id='li-" + i + "'><a href='https://doi.org/" + row.citing + "'>https://doi.org/" + row.citing + "</a>";
 						message += " (" + row.creation + ")</li>";
 					}
-					message += "</ul>";
+					message += "</ul></html>";
+					parser = new DOMParser();
+					messageDocument = parser.parseFromString(message, "text/html");
 					
 					// use eiter existing subcollection with citations or create a new one
 					var citationCollectionId;
@@ -118,11 +121,23 @@ Zotero.OpenCitations.checkOC = function() {
 								collections: [citationCollectionId]
 							});
 						}
-						// create relation in both directions
+						
 						if (result) {
 							if (Array.isArray(result)) {
 								result = result[0];
 							}
+							// update note message
+							let oldContent = messageDocument.getElementById("li-" + i).innerHTML;
+							let creatorsNames = result.getCreators().map(creatorsObject => creatorsObject.lastName);
+							let collectionsPaths = result.getCollections().map(
+								id => Zotero.Collections.get(id).name + " [collection id: " + id + "]"
+							);
+							let selectLink = "zotero://select/items/" + result.libraryID + "_" + result.key;
+							messageDocument.getElementById("li-" + i).innerHTML = oldContent
+								+ ": <a href='" + selectLink + "'>" + result.getField('title') + "</a>"
+								+ " / " + creatorsNames.join(", ")
+								+ "<ul><li>" + collectionsPaths.join("</li><li>") + "</li><ul>";
+							// create relation in both directions
 							if (!result.relatedItems.includes(item.key)) {
 								result.addRelatedItem(item);
 								await result.saveTx();
@@ -132,6 +147,7 @@ Zotero.OpenCitations.checkOC = function() {
 						}
 					}
 				}
+				message = messageDocument.documentElement.outerHTML;
 				newNote.setNote(message);
 				newNote.parentID = itemID;
 				noteID = await newNote.saveTx();
