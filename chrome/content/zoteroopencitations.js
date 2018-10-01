@@ -146,12 +146,11 @@ Zotero.OpenCitations.checkOC = function() {
 							}
 						}
 					}
+					message = messageDocument.documentElement.outerHTML;
 				}
-				message = messageDocument.documentElement.outerHTML;
 				newNote.setNote(message);
 				newNote.parentID = itemID;
 				noteID = await newNote.saveTx();
-				
 			} else {
 				Zotero.debug(req);
 				// alert(req.readyState + " " + req.statusText);
