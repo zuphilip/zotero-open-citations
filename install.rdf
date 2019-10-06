@@ -12,7 +12,7 @@
         em:icon64URL="chrome://zoteroopencitations/skin/wooc64x64.png"
         em:creator="Philipp Zumstein"
         em:description="Zotero Plugin for Open Citations"
-        em:homepageURL="https://github.org/zuphilip/zotero-open-citations"
+        em:homepageURL="https://github.com/zuphilip/zotero-open-citations"
         em:updateURL="https://raw.githubusercontent.com/zuphilip/zotero-open-citations/master/update.rdf">
         <em:optionsURL>chrome://zoteroopencitations/content/preferences.xul</em:optionsURL>
         <em:type>2</em:type>
